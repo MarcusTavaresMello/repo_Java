@@ -12,7 +12,7 @@ import View.Login;
  *
  * @author tiago
  */
-public class LoginHelper {
+public class LoginHelper implements iHelper {
     
     private final Login view;
 

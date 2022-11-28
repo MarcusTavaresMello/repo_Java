@@ -6,8 +6,10 @@
 package Controller;
 
 import Controller.Helper.LoginHelper;
+import Model.DAO.UsuarioDAO;
 import Model.Usuario;
 import View.Login;
+import View.MenuPrincipal;
 
 /**
  *
@@ -34,8 +36,20 @@ public class LoginController {
         
        
        //Pesquisa Usuario no Banco
-       ////Se o usuario da view tiver mesmo usuario e senha que o usuario vindo do banco direcionar para menu principal
+       UsuarioDAO usuarioDAO = new UsuarioDAO();
+       Usuario usuarioAutenticado = usuarioDAO.selectPorNomeESenha(usuario);
+       
+       //Se o usuario da view tiver mesmo usuario e senha que o usuario vindo do banco direcionar para menu principal
        //Senão mostrar uma mensagem ao usuario "Usuario ou senha invalidos"
+       if(usuarioAutenticado != null){
+           //navegar para menu principal
+           MenuPrincipal menu = new MenuPrincipal();
+           menu.setVisible(true);
+           this.view.dispose();
+       } else {
+           view.exibeMensagem("Usuário ou senha inválidos");
+       }
+
     }
     
     
